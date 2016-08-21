@@ -11,3 +11,14 @@ html, body {
 #map_canvas {
   height: 100%;
 }
+#btn {
+  display: block;
+  margin: 20px auto;
+}
+#search_bar{
+  display: block;
+  margin: 20px auto;
+}
+h3 {
+  text-align: center;
+}

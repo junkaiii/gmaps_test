@@ -98,6 +98,7 @@ function showCurrentLocation() {
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
         //template for infoWindow content
+        //suggestion from http://you.arenot.me/2010/06/29/google-maps-api-v3-0-multiple-markers-multiple-infowindows/
         var infoWindowContent =
           '<div class="info_content">' +
           '<h3>' + this.name + '</h3>' +
