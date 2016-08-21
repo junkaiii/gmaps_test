@@ -1,5 +1,3 @@
-
-
 //declaring variables
 
 var $out = $('#out');
@@ -7,6 +5,7 @@ var $btn = $('#btn');
 var longitude;
 var latitude;
 var map;
+
 
 //simulated json reply
 var locations_obj = [{
@@ -77,7 +76,37 @@ function showCurrentLocation() {
   });
 
   //adds surrounding data
-  
+
+  // Display multiple markers on a map
+  var infoWindow = new google.maps.InfoWindow(),
+    marker, i;
+  var bounds = new google.maps.LatLngBounds();
+
+
+  // Loop through our array of markers & place each one on the map
+  for (i = 0; i < locations_obj.length; i++) {
+    var locations = locations_obj[i];
+    var position = new google.maps.LatLng(locations.latLong.coordinates[0], locations.latLong.coordinates[1]);
+    bounds.extend(position);
+    marker = new google.maps.Marker({
+      position: position,
+      map: map,
+      // title: markers[i][0]
+    });
+
+    // Allow each marker to have an info window
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      return function() {
+        infoWindow.setContent("Test");
+        infoWindow.open(map, marker);
+      };
+    })(marker, i));
+
+    // Automatically center the map fitting all markers on the screen
+    map.fitBounds(bounds);
+  }
+
+
 }
 
 
