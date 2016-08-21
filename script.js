@@ -29,13 +29,12 @@ var locations_obj = [{
   "__v": 0,
   "latLong": {
     "coordinates": [
-      1.322143,
-      103.949627
+      1.4052,
+      103.9024
     ],
     "type": "Point"
   },
 }];
-
 
 // Asynchronously loading Gmaps API
 jQuery(function($) {
@@ -94,10 +93,16 @@ function showCurrentLocation() {
       // title: markers[i][0]
     });
 
+    //template for infoWindow content
+    var infoWindowContent =
+      '<div class="info_content">' +
+      '<h3>' + locations.name + '</h3>' +
+      '<p>' + locations.name + '</p>' + '</div>';
+
     // Allow each marker to have an info window
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
-        infoWindow.setContent("Test");
+        infoWindow.setContent(infoWindowContent);
         infoWindow.open(map, marker);
       };
     })(marker, i));
@@ -108,9 +113,6 @@ function showCurrentLocation() {
 
 
 }
-
-
-
 
 //Getting current location
 function getCurrentLocation() {
