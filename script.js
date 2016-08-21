@@ -139,4 +139,14 @@ function getCurrentLocation() {
 
 }
 
+//Get location event listener
 $btn.click(getCurrentLocation);
+
+
+//Setting event listener for search bar
+$("#search_bar").keyup(function (e) {
+    if (e.keyCode == 13) {
+      console.log($("#search_bar").val());
+      $("#search_bar").val('');
+    }
+});
