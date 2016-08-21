@@ -75,7 +75,6 @@ function initialize() {
     },
     map: map,
     //label: label_name,
-
   });
 
   // // Display multiple markers on a map

@@ -1,8 +1,41 @@
+
+
+//declaring variables
+
 var $out = $('#out');
 var $btn = $('#btn');
 var longitude;
 var latitude;
 var map;
+
+//simulated json reply
+var locations_obj = [{
+  "_id": "57b7e5bdc0091c10b1e3569d",
+  "name": "MACS",
+  "category": "fast food",
+  "postalCode": "123454",
+  "__v": 0,
+  "latLong": {
+    "coordinates": [
+      1.403991,
+      103.905664
+    ],
+    "type": "Point"
+  },
+}, {
+  "_id": "57b7e5bdc0091c10b1e3569d",
+  "name": "KFC",
+  "category": "fast food",
+  "postalCode": "123454",
+  "__v": 0,
+  "latLong": {
+    "coordinates": [
+      1.322143,
+      103.949627
+    ],
+    "type": "Point"
+  },
+}];
 
 
 // Asynchronously loading Gmaps API
@@ -12,7 +45,7 @@ jQuery(function($) {
   document.body.appendChild(script);
 });
 
-
+//loads GMAPS initial view of Singapore
 function initialize() {
   map = new google.maps.Map(document.getElementById('map_canvas'), {
     center: {
@@ -24,6 +57,7 @@ function initialize() {
   });
 }
 
+//zooms in to current location
 function showCurrentLocation() {
   map = new google.maps.Map(document.getElementById('map_canvas'), {
     center: {
@@ -33,7 +67,21 @@ function showCurrentLocation() {
     },
     zoom: 15
   });
+
+  current_position_marker = new google.maps.Marker({
+    position: {
+      lat: latitude,
+      lng: longitude
+    },
+    map: map,
+  });
+
+  //adds surrounding data
+  
 }
+
+
+
 
 //Getting current location
 function getCurrentLocation() {
