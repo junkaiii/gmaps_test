@@ -90,20 +90,20 @@ function showCurrentLocation() {
     marker = new google.maps.Marker({
       position: position,
       map: map,
+      name: locations.name,
       // title: markers[i][0]
     });
-
-    //template for infoWindow content
-    var infoWindowContent =
-      '<div class="info_content">' +
-      '<h3>' + locations.name + '</h3>' +
-      '<p>' + locations.name + '</p>' + '</div>';
 
     // Allow each marker to have an info window
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
+        //template for infoWindow content
+        var infoWindowContent =
+          '<div class="info_content">' +
+          '<h3>' + this.name + '</h3>' +
+          '<p>' + this.name + '</p>' + '</div>';
         infoWindow.setContent(infoWindowContent);
-        infoWindow.open(map, marker);
+        infoWindow.open(map, this);
       };
     })(marker, i));
 
