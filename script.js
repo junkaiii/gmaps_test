@@ -144,9 +144,31 @@ $btn.click(getCurrentLocation);
 
 
 //Setting event listener for search bar
-$("#search_bar").keyup(function (e) {
-    if (e.keyCode == 13) {
-      console.log($("#search_bar").val());
-      $("#search_bar").val('');
-    }
+$("#search_bar").keyup(function(e) {
+  if (e.keyCode == 13) {
+
+    get_search_info = $("#search_bar").val();
+    concat_search = get_search_info.split(" ").join('+');
+    console.log('input value is ' + concat_search);
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + concat_search + '+Singapore&key=AIzaSyAC6yk_-cvrYiP_NO4l75OcVcJlRbdZ_Gw';
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+    }).done(function successFunction(data) {
+      search_latitude = data.results[0].geometry.viewport.northeast.lat;
+      search_longitude = data.results[0].geometry.viewport.northeast.lng;
+      console.log('Searched location is ' + search_latitude + ' ' + search_longitude);
+    })
+
+      .fail(function failFunction(request, textStatus, errorThrown) {
+        console.log('An error occurred during your request: ' + request.status + ' ' + textStatus + ' ' + errorThrown);
+      })
+      .always(function alwaysFunction() {
+        console.log('always function');
+      });
+
+
+    $("#search_bar").val('');
+  }
 });
